@@ -2,56 +2,83 @@
 import './App.css';
 import { useState } from "react";
 import Task from './components/Task';
-
+// import Search from './components/Search';
+// import data from "./data.json"
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
 library.add(faTrash);
-
-// style={{backgroundColor: checked===false ? "blue" : "red"}}
-
-//key={index} style={{color: checked===false ? "blue" : "red"}}
-
-
+let tabBis = [];
 function App() {
+
   const [tab, setTab] = useState([]);
   const [task, setTask] = useState("");
-  // const handleTaskChange = event => {
-  //    const value = event.target.value;
-  //    setTask(value)};
+  const [input, setInput] = useState("");
+  // const [tabBis, setTabBis] = useState([])
+
   const handleSubmit = event => {
     event.preventDefault(); // Pour empêcher le navigateur de changer de page lors de la soumission du formulaire
   
-
   }
-  return (
 
+ const handleInputChange = event => {
+  event.preventDefault()
+  tabBis = []
+  setInput(event.target.value)
 
-    
+  for (let i = 0; i < tab.length; i++) {  
+
+   if (tab[i].props.put.indexOf(input) !== -1) {
+     tabBis.push(<p key={tab[i].props.put}>{tab[i].props.put} </p>
+        )}
+          }}
+
+  return ( 
     <div className="App">
 
+
 <div className='bloc'>
-    {tab.map((item, index) => {return (item)})}
+    {
+    
+  tab.map((item, index) => {return (item)})} 
 </div>
    
-
-
-<form onSubmit={handleSubmit}>
+<form onSubmit={handleSubmit }>
 <h1>Todo List</h1>
 <input type="text" placeholder='new task' onChange={(event)=>{setTask(event.target.value)}} value={task}/>
   <button 
   onClick={()=>{
-    const newTab = [...tab];
-    newTab.push(<Task put={task}/>);  
-    setTab(newTab) 
+       const newTab = [...tab]
+    newTab.push(<Task put={task}/>);
+    setTab(newTab)
   }
   }>Add task</button>
 
 </form>
 
 
+<div>
+  <h3>Search</h3>
+  <input
+        value={input}
+            onChange = {handleInputChange}
+        type="text"
+        placeholder="Your Search"
+  
+/>
+</div>
 
+<div>
+ {tabBis.map((search) => {
+         return (
+          <p>
+            {search.props.children[0]} 
+          </p>
+        );
+      })}
+    </div>
 </div>
 )
 }
+
 export default App;

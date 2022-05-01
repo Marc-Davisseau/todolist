@@ -26,6 +26,7 @@ display: checked2===true ? "none" : ""
  onSubmit={handleSubmit}
 
 />{props.put}
+
 <input  className="check2" type="checkbox"
 
 onClick={()=> setChecked2(!checked2)}
