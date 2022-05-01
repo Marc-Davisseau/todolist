@@ -11,9 +11,11 @@ library.add(faTrash);
 let tabBis = [];
 function App() {
 
+
   const [tab, setTab] = useState([]);
   const [task, setTask] = useState("");
   const [input, setInput] = useState("");
+  const [param, setParam] = useState(false);
   // const [tabBis, setTabBis] = useState([])
 
   const handleSubmit = event => {
@@ -25,7 +27,7 @@ function App() {
   event.preventDefault()
   tabBis = []
   setInput(event.target.value)
-
+  console.log(param)
   for (let i = 0; i < tab.length; i++) {  
 
    if (tab[i].props.put.indexOf(input) !== -1) {
@@ -34,7 +36,7 @@ function App() {
           }}
 
   return ( 
-    <div className="App">
+    <div  style ={{background:param===true?"blue":"white" , color:param===true?"white":"black"}}>
 
 
 <div className='bloc'>
@@ -77,7 +79,14 @@ function App() {
         );
       })}
     </div>
+
+<button
+
+onClick={()=>setParam(!param)}>Dark/Light</button>
+
 </div>
+
+
 )
 }
 
